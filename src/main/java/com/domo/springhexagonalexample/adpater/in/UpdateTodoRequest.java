@@ -1,4 +1,4 @@
-package com.domo.springhexagonalexample.dto;
+package com.domo.springhexagonalexample.adpater.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

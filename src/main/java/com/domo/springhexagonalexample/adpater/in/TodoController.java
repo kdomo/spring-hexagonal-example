@@ -1,4 +1,4 @@
-package com.domo.springhexagonalexample.controller;
+package com.domo.springhexagonalexample.adpater.in;
 
 import java.util.List;
 
@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.domo.springhexagonalexample.dto.CreateTodoRequest;
-import com.domo.springhexagonalexample.dto.TodoDto;
-import com.domo.springhexagonalexample.dto.UpdateTodoRequest;
-import com.domo.springhexagonalexample.service.TodoService;
+import com.domo.springhexagonalexample.application.port.in.TodoUseCase;
+import com.domo.springhexagonalexample.domain.Todo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,29 +22,29 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/todos")
 @RequiredArgsConstructor
 public class TodoController {
-	private final TodoService todoService;
+	private final TodoUseCase todoUseCase;
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<TodoDto> getAllTodos() {
-		return todoService.getAllTodos();
+	public List<Todo> getAllTodos() {
+		return todoUseCase.getAllTodos();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createTodo(@RequestBody CreateTodoRequest todoRequest){
-		todoService.createTodo(todoRequest);
+		todoUseCase.createTodo(todoRequest);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void updateTodo(@PathVariable Long id, @RequestBody UpdateTodoRequest todoRequest){
-		todoService.updateTodo(id, todoRequest);
+		todoUseCase.updateTodo(id, todoRequest);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void deleteTodo(@PathVariable Long id){
-		todoService.deleteTodo(id);
+		todoUseCase.deleteTodo(id);
 	}
 }
